@@ -19,10 +19,12 @@ axios.interceptors.response.use(
 );
 
 const createOrder = params => {
-  const fromData = new FormData();
-  fromData.append("amount", 10000);
+  const formData = new FormData();
+  Object.keys(params).forEach(key => {
+    formData.append(key, params[key]);
+  });
 
-  return axios.post(CREATE_ORDER_PATH, fromData);
+  return axios.post(CREATE_ORDER_PATH, formData);
 };
 
 export default {
